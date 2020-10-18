@@ -9,6 +9,8 @@ import static java.lang.System.out;
 public class World {
     public static void main(String[] args) {
         out.println("START PROGRAMU");
+        String[] kamil = {"f"};
+        out.println(Arrays.toString(transfer(kamil)));
         run(transfer(args));
         out.println("KONIEC PROGRAMU");
     }
@@ -16,7 +18,6 @@ public class World {
     private static final Set VALU = Set.of("f", "b", "l", "r");
 
     public static void run(Direction[] args) {
-
         Stream<Direction> our_stream = Arrays.stream(args);
         our_stream.map(World::whatText).forEach(out::println);
     }

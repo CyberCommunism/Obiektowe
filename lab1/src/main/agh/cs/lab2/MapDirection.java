@@ -14,11 +14,18 @@ public enum MapDirection {
         this.mapDirSymbol = mapDirSymbol;
         this.dirVector = dirVector;
     }
-    @Override
-    public String toString() {
-        String val = (String) vals[this.ordinal()];
-        return val; }
+    //@Override
+    //public String toString() { return (String) vals[this.ordinal()]; }
+    public MapDirection previous() {
+
+        if(this.ordinal()==0){
+            return MapDirection.WEST;
+        }else{
+            return vals[this.ordinal()-1];
+        }
+
+    }
     public MapDirection next() { return vals[(this.ordinal()+1) % vals.length]; }
-    public MapDirection previous() { return vals[(this.ordinal()-1) % vals.length]; }
+
     public Vector2d toUnitVector() { return dirVector; }
 }
