@@ -1,40 +1,24 @@
 package agh.cs.lab2;
 
 public enum MapDirection {
-    NORTH, EAST, SOUTH, WEST;
+    NORTH( "N", new Vector2d(0, 1)),
+    EAST("E", new Vector2d(1, 0)),
+    SOUTH("S", new Vector2d(0, -1)),
+    WEST("W", new Vector2d(-1, 0));
 
+    final String mapDirSymbol;
+    final Vector2d dirVector;
+    private static final MapDirection[] vals = values();
+
+    MapDirection(String mapDirSymbol, Vector2d dirVector) {
+        this.mapDirSymbol = mapDirSymbol;
+        this.dirVector = dirVector;
+    }
+    @Override
     public String toString() {
-        return switch (this) {
-            case NORTH -> "Północ";
-            case SOUTH -> "Południe";
-            case WEST -> "Zachód";
-            case EAST -> "Wschód";
-        };
-    }
-    public MapDirection next() {
-        return switch (this) {
-            case NORTH -> EAST;
-            case SOUTH -> WEST;
-            case WEST -> NORTH;
-            case EAST -> SOUTH;
-        };
-    }
-    public MapDirection previous() {
-        return switch (this) {
-            case NORTH -> WEST;
-            case SOUTH -> EAST;
-            case WEST -> SOUTH;
-            case EAST -> NORTH;
-        };
-    }
-    public Vector2d toUnitVector() {
-        return switch (this) {
-            case NORTH -> new Vector2d(0,1);
-            case SOUTH -> new Vector2d(0,-1);
-            case WEST -> new Vector2d(-1,0);
-            case EAST -> new Vector2d(1,0);
-        };
-    }
-
-
+        String val = (String) vals[this.ordinal()];
+        return val; }
+    public MapDirection next() { return vals[(this.ordinal()+1) % vals.length]; }
+    public MapDirection previous() { return vals[(this.ordinal()-1) % vals.length]; }
+    public Vector2d toUnitVector() { return dirVector; }
 }
