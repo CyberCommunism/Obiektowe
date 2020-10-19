@@ -1,4 +1,4 @@
-package agh.cs.lab2;
+package agh.cs.lab1;
 
 public enum MapDirection {
     NORTH( "N", new Vector2d(0, 1)),
