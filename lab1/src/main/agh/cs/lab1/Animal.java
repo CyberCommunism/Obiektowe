@@ -1,27 +1,40 @@
 package agh.cs.lab1;
-import static java.lang.System.out;
 
-public class World {
-    public static void main(String[] args) {
-        out.println("START PROGRAMU");
-        Animal kamil = new Animal();
-        out.println(kamil);
-        MoveDirection[] gra = OptionsParser.parse(args);
-        for (MoveDirection ruch : gra) {
-            kamil.move(ruch);
-        }
-        out.println(kamil);
-        out.println("KONIEC PROGRAMU");
+class Animal {
+    final Vector2d PRAWAGRANICA = new Vector2d(4,4);
+    final Vector2d LEWAGRANICA = new Vector2d(0,0);
+
+
+    private Vector2d position = new Vector2d(2,2);
+    private MapDirection orietationt = MapDirection.NORTH;
+
+
+
+    public String toString(){
+        return "( pozycja " + position.toString() + " --- kierunek " + orietationt.toString() + " )";
     }
-}
+    public void move(MoveDirection direction){
+        Vector2d testF = this.position.add(this.orietationt.toUnitVector());
+        Vector2d testB = this.position.subtract(this.orietationt.toUnitVector());
+        switch (direction){
+            case RIGHT -> this.orietationt = this.orietationt.next();
+            case LEFT -> this.orietationt = this.orietationt.previous();
+            case FORWARD -> {
+                if(testF.precedes(PRAWAGRANICA) && testF.follows(LEWAGRANICA)){
+                    this.position = testF;
+                }
+            }
+            case BACKWARD -> {
+                if(testB.precedes(PRAWAGRANICA)&&testB.follows(LEWAGRANICA)){
+                    this.position = testB;
+                }
+            }
+        }
+    }
 
-
-/*
-Przyjrzyj się interfejsowi IWorldMap, który znajduje się w tym katalogu.
-
-
-zdefiniuj konstruktor Animal(IWorldMap map); wykorzystaj argument map tak aby w metodzie move można było odwołać się do mapy i zweryfikować,
-czy zwierzę może przesunąć się na daną pozycję,
+    /*
+    zdefiniuj konstruktor Animal(IWorldMap map); wykorzystaj argument map tak aby w metodzie move można było odwołać
+    się do mapy i zweryfikować, czy zwierzę może przesunąć się na daną pozycję,
 
 zdefiniuj konstruktor Animal(IWorldMap map, Vector2d initialPosition), który dodatkowo określa początkowe położenie zwierzęcia na mapie,
 zastanów się nad dotychczasowym konstruktorem bezparametrowym
@@ -46,45 +59,14 @@ map.run(directions);
 Sprawdź czy zwierzęta poruszają się poprawnie dla ciągu: f b r l f f r r f f f f f f f f.
 
 Dodaj testy integracyjne weryfikujące, że implementacja jest poprawna. Wykorzystaj dane z punktu 5 w celu ustalenia przebiegu testu.
-(Dla zaawansowanych) Stwórz tekstowy widget biblioteki Swing, który będzie wyświetlał animację poruszających się zwierzaków.*/
+(Dla zaawansowanych) Stwórz tekstowy widget biblioteki Swing, który będzie wyświetlał animację poruszających się zwierzaków.
 
+=========================================================================================================================================================================================
 
+Napisz testy integracyjne weryfiujące poprawność implementacji. Uwzględnij:
+czy zwierzę ma właściwą orientację,
+czy zwierzę przemieszcza się na właściwe pozycje,
+czy zwierzę nie wychodzi poza mapę,
+czy dane wejściowe podane jako tablica łańcuchów znaków są poprawnie interpretowane.*/
 
-
-
-
-/*
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Stream;
-
-    private static final Set VALU = Set.of("f", "b", "l", "r");
-
-    public static void run(Direction[] args) {
-        Stream<Direction> our_stream = Arrays.stream(args);
-        our_stream.map(World::whatText).forEach(out::println);
-    }
-
-    public static Direction[] transfer(String[] args) {
-        Stream<String> our_stream = Arrays.stream(args);
-        return our_stream.filter(VALU::contains).map(World::whatEn).toArray(Direction[]::new);
-    }
-
-    public static String whatText(Direction whatEn) {
-        return switch (whatEn) {
-            case FORWARD -> "Zwierzak idzie do przodu";
-            case BACKWARD -> "Zwierzak idzie do tylu";
-            case LEFT -> "Zwierzak idzie do w lewo";
-            case RIGHT -> "Zwierzak idzie do prawo";
-        };
-    }
-    public static Direction whatEn(String cha){
-        return switch (cha){
-            case "f"->Direction.FORWARD;
-            case "b"->Direction.BACKWARD;
-            case "l"->Direction.LEFT;
-            case "r"->Direction.RIGHT;
-            default -> throw new IllegalStateException("Unexpected value: " + cha);
-        };
-    }*/
-
+}

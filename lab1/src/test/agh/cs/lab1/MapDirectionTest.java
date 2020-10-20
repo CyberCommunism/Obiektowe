@@ -1,29 +1,18 @@
 package agh.cs.lab1;
-
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 class MapDirectionTest {
-
+    public static MapDirection[] testy = {MapDirection.NORTH,MapDirection.EAST,MapDirection.SOUTH,MapDirection.WEST};
     @Test
     void previous() {
-        MapDirection x =MapDirection.EAST;
+        for(int i=0;i< testy.length;i++){
+            assertEquals(testy[i],testy[(i+1) % testy.length].previous());
+        }
     }
-
     @Test
     void next() {
-    }
-
-    @Test
-    void toUnitVector() {
-    }
-
-    @Test
-    void values() {
-    }
-
-    @Test
-    void valueOf() {
+        for(int i=0;i< testy.length;i++){
+            assertEquals(testy[(i+1) % testy.length],testy[i].next());
+        }
     }
 }
