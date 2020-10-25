@@ -19,7 +19,6 @@ public class World {
 /*
 Przyjrzyj się interfejsowi IWorldMap, który znajduje się w tym katalogu.
 
-
 zdefiniuj konstruktor Animal(IWorldMap map); wykorzystaj argument map tak aby w metodzie move można było odwołać się do mapy i zweryfikować,
 czy zwierzę może przesunąć się na daną pozycję,
 
@@ -46,7 +45,15 @@ map.run(directions);
 Sprawdź czy zwierzęta poruszają się poprawnie dla ciągu: f b r l f f r r f f f f f f f f.
 
 Dodaj testy integracyjne weryfikujące, że implementacja jest poprawna. Wykorzystaj dane z punktu 5 w celu ustalenia przebiegu testu.
-(Dla zaawansowanych) Stwórz tekstowy widget biblioteki Swing, który będzie wyświetlał animację poruszających się zwierzaków.*/
+(Dla zaawansowanych) Stwórz tekstowy widget biblioteki Swing, który będzie wyświetlał animację poruszających się zwierzaków.
+
+=========================================================================================================================================================================================
+
+czy zwierzę ma właściwą orientację,
+czy zwierzę przemieszcza się na właściwe pozycje,
+czy zwierzę nie wychodzi poza mapę,
+czy dane wejściowe podane jako tablica łańcuchów znaków są poprawnie interpretowane.
+*/
 
 
 
