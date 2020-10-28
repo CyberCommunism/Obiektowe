@@ -1,4 +1,5 @@
 package agh.cs.lab1;
+import agh.cs.lab2.MapDirection;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 class MapDirectionTest {

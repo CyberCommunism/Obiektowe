@@ -1,19 +1,37 @@
 package agh.cs.lab1;
-import static java.lang.System.out;
+import agh.cs.lab3.*;
+import agh.cs.lab2.*;
+import agh.cs.lab4.*;
+
+
 
 public class World {
     public static void main(String[] args) {
-        out.println("START PROGRAMU");
-        Animal kamil = new Animal();
-        out.println(kamil);
-        MoveDirection[] gra = OptionsParser.parse(args);
-        for (MoveDirection ruch : gra) {
-            kamil.move(ruch);
-        }
-        out.println(kamil);
-        out.println("KONIEC PROGRAMU");
+        MoveDirection[] directions = OptionsParser.parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        map.place(new Animal(map));
+        map.place(new Animal(map,new Vector2d(3,4)));
+        map.run(directions);
+
+        System.out.print(((RectangularMap) map).animals.get(0));
+        System.out.print(((RectangularMap) map).animals.get(1));
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*

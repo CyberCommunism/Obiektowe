@@ -1,4 +1,6 @@
-package agh.cs.lab1;
+package agh.cs.lab3;
+
+import agh.cs.lab2.MoveDirection;
 
 import java.util.Arrays;
 import java.util.Set;

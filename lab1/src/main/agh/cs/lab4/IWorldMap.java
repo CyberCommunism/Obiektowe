@@ -1,4 +1,8 @@
-package agh.cs.lab1;
+package agh.cs.lab4;
+
+import agh.cs.lab3.Animal;
+import agh.cs.lab2.MoveDirection;
+import agh.cs.lab2.Vector2d;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -53,5 +57,5 @@ public interface IWorldMap {
      *            The position of the object.
      * @return Object or null if the position is not occupied.
      */
-    Object objectAt(Vector2d position);
+    Animal objectAt(Vector2d position);
 }

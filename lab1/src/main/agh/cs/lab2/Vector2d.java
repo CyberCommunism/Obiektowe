@@ -1,10 +1,10 @@
-package agh.cs.lab1;
+package agh.cs.lab2;
 
 import java.util.Objects;
 
 public class Vector2d {
-    final int x;
-    final int y;
+    public final int x;
+    public final int y;
 
     public Vector2d(int x, int y)
     {

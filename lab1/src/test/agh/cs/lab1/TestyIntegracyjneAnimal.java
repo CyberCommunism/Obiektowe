@@ -1,13 +1,52 @@
 package agh.cs.lab1;
 
-import java.util.Set;
+import agh.cs.lab2.*;
+import agh.cs.lab3.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+
+import agh.cs.lab4.IWorldMap;
+import agh.cs.lab4.RectangularMap;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestyIntegracyjneAnimal {
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final PrintStream outOrigin = System.out;
+
+    @BeforeEach
+    public void setUpStreams(){
+        System.setOut(new PrintStream(out));
+    }
+    @AfterEach
+    public void restoreStream(){
+        System.setOut(outOrigin);
+    }
+    @Test
+    void testParse(){
+        String[] val ={"f","123", "forward", "b","haha", "backward", "r", "right", "l", "left","x","mapa","1piwo","to","nie","piwo"};
+        World.main(val);
+        String expected = new Vector2d(2,2).toString() + "N";
+        assertEquals(expected,out.toString());
+
+    }
+    @Test
+    void testParse1(){
+        String[] val ={};
+        World.main(val);
+        String expected = new Vector2d(2,2).toString() + "N";
+        assertEquals(expected,out.toString());
+    }
+
     @Test
     void testNaOrientacje(){
-        Animal noweZwierze = new Animal();
+        IWorldMap ma = new RectangularMap(4,4);
+        Animal noweZwierze = new Animal(ma);
 
         noweZwierze.move(MoveDirection.RIGHT);
         assertEquals(MapDirection.EAST,noweZwierze.getDirection());
@@ -23,7 +62,8 @@ public class TestyIntegracyjneAnimal {
     }
     @Test
     void testNaPozycje(){
-        Animal noweZwierze = new Animal();
+        IWorldMap ma = new RectangularMap(4,4);
+        Animal noweZwierze = new Animal(ma);
 
         MoveDirection idztyl = MoveDirection.BACKWARD;
         MoveDirection idzprzod = MoveDirection.FORWARD;
@@ -58,7 +98,8 @@ public class TestyIntegracyjneAnimal {
     }
     @Test
     void testNaOgraniczeniaMapy(){
-        Animal noweZwierze = new Animal();
+        IWorldMap ma = new RectangularMap(4,4);
+        Animal noweZwierze = new Animal(ma);
 
         MoveDirection idztyl = MoveDirection.BACKWARD;
         MoveDirection idzprzod = MoveDirection.FORWARD;
@@ -77,16 +118,6 @@ public class TestyIntegracyjneAnimal {
         }
         assertEquals(new Vector2d(0,4),noweZwierze.getPosition());
 
-
-
     }
-    @Test
-    void testParse(){
-        String[] val ={"f","123", "forward", "b","haha", "backward", "r", "right", "l", "left","x","mapa","1piwo","to","nie","piwo"};
-        Set val1 = Set.of(MoveDirection.FORWARD,MoveDirection.BACKWARD,MoveDirection.RIGHT,MoveDirection.LEFT);
-        for (Object x:OptionsParser.parse(val)){
-            assertTrue(val1.contains(x));
-        }
 
-    }
 }
